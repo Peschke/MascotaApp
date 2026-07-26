@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const api = axios.create({
-    BaseURL: "https://mascotas.pythonanywhere.com/api/",
+const mascotasApi = axios.create({
+    baseURL: "https://mascotas.pythonanywhere.com/api/",
 });
 
-export default api;
+export default mascotasApi;

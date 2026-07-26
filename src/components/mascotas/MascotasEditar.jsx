@@ -1,17 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import mascotasApi from "../../services/api";
+
 function MascotasEditar() {
     //select api choices
     const [estados, setEstados] = useState([]);
     const [tipoMascota, setTipoMascota] = useState([]);
     const [sexo, setSexo] = useState([]);
     const [tamano, setTamano] = useState([]);
-    //seleccionado
-    const [selectedEstado, setEstado] = useState("");
-    const [selectedTipoMascota, setTipoMascotaSeleccionada] = useState("");
-    const [selectedSexo, setSexoSeleccionado] = useState("");
-    const [selectedTamano, setTamanoSeleccionado] = useState("");
 
     const [campoEditar, setCampoEditar] = useState("");
     const [nuevoValor, setNuevoValor] = useState("");
@@ -178,7 +173,7 @@ function MascotasEditar() {
 
                 {campoEditar === "estado" ? (
                     <>
-                        <select value={selectedEstado} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >Sin estado</option>
                             {
                                 estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
@@ -215,7 +210,7 @@ function MascotasEditar() {
 
                 {campoEditar === "tipo_animal" ? (
                     <>
-                        <select value={selectedTipoMascota} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >Sin estado</option>
                             {
                                 tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
@@ -322,7 +317,7 @@ function MascotasEditar() {
 
                 {campoEditar === "sexo" ? (
                     <>
-                        <select value={selectedSexo} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >Sin estado</option>
                             {
                                 sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
@@ -359,7 +354,7 @@ function MascotasEditar() {
 
                 {campoEditar === "tamano" ? (
                     <>
-                        <select value={selectedTamano} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >desconocido</option>
                             {
                                 tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)

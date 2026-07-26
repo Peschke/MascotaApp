@@ -11,9 +11,51 @@ function MascotasForm() {
     const [sexo, setSexo] = useState('')
     const [tamano, setTamano] = useState('')
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const data = new FormData()
+
+        data.append('nombre', nombre)
+        data.append('descripcion', descripcion)
+        data.append('estado', estado)
+        data.append('tipo_animal', tipo_animal)
+
+        if (imagen) data.append('imagen', imagen)
+        if (edad) data.append('edad', edad)
+        if (raza) data.append('raza', raza)
+        if (sexo) data.append('sexo', sexo)
+        if (tamano) data.append('tamano', tamano)
+
+        try {
+            const response = await api.post('mascotas/', data)
+            console.log('Mascota creada:', response.data)
+            alert('Se ha creado la mascota con éxito.')
+
+            // Limpieza de campos al terminar
+            setNombre('')
+            setDescripcion('')
+            setImagen(null)
+            setEstado('perdida')
+            setTipoAnimal('otro')
+            setEdad('')
+            setRaza('')
+            setSexo('')
+            setTamano('')
+
+            // Avisamos al componente padre si existe la función
+            if (onMascotaCreada) {
+                onMascotaCreada()
+            }
+        } catch (error) {
+            console.error('Error al crear mascota:', error.response)
+            alert('Hubo un error al registrar la mascota.')
+        }
+    }
+
+
     return (
         <form>
-            <h2>Crear Mascota</h2>
 
             <label>Nombre:</label>
             <input

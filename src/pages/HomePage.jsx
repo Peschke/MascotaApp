@@ -11,11 +11,11 @@ function HomePage() {
         
         <div>
         |
-          <NavLink to="/mascotas/">
+          <NavLink to="/mascotas">
             Ver todas las mascotas
           </NavLink>
         |   |
-          <NavLink to="/mascotas/nueva/">
+          <NavLink to="/mascotas/nueva">
             Publicar una mascota
           </NavLink>
         |

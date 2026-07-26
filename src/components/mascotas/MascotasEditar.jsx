@@ -186,6 +186,181 @@ function MascotasEditar() {
                 )}
             </p>
 
+            <p>
+                <strong>Tipo Animal:</strong>
+
+                {campoEditar === "tipo_animal" ? (
+                    <>
+                        <input
+                            value={nuevoValor}
+                            onChange={(e) => setNuevoValor(e.target.value)}
+                        />
+
+                        <button onClick={() => editarCampo("tipo_animal")}>
+                            Guardar
+                        </button>
+
+                        <button onClick={() => setCampoEditar("")}>
+                            Cancelar
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {mascota.tipo_animal}
+
+                        <button
+                            onClick={() => {
+                                setCampoEditar("tipo_animal");
+                                setNuevoValor(mascota.tipo_animal);
+                            }}
+                        >
+                            Editar
+                        </button>
+                        
+                    </>
+                )}
+            </p>
+
+            <p>
+                <strong>Edad:</strong>
+
+                {campoEditar === "edad" ? (
+                    <>
+                        <input
+                            value={nuevoValor}
+                            onChange={(e) => setNuevoValor(e.target.value)}
+                        />
+
+                        <button onClick={() => editarCampo("edad")}>
+                            Guardar
+                        </button>
+
+                        <button onClick={() => setCampoEditar("")}>
+                            Cancelar
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {mascota.edad}
+
+                        <button
+                            onClick={() => {
+                                setCampoEditar("edad");
+                                setNuevoValor(mascota.edad);
+                            }}
+                        >
+                            Editar
+                        </button>
+                        
+                    </>
+                )}
+            </p>
+
+            <p>
+                <strong>Raza:</strong>
+
+                {campoEditar === "raza" ? (
+                    <>
+                        <input
+                            value={nuevoValor}
+                            onChange={(e) => setNuevoValor(e.target.value)}
+                        />
+
+                        <button onClick={() => editarCampo("raza")}>
+                            Guardar
+                        </button>
+
+                        <button onClick={() => setCampoEditar("")}>
+                            Cancelar
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {mascota.raza}
+
+                        <button
+                            onClick={() => {
+                                setCampoEditar("raza");
+                                setNuevoValor(mascota.raza);
+                            }}
+                        >
+                            Editar
+                        </button>
+                        
+                    </>
+                )}
+            </p>
+
+            <p>
+                <strong>Sexo:</strong>
+
+                {campoEditar === "sexo" ? (
+                    <>
+                        <input
+                            value={nuevoValor}
+                            onChange={(e) => setNuevoValor(e.target.value)}
+                        />
+
+                        <button onClick={() => editarCampo("sexo")}>
+                            Guardar
+                        </button>
+
+                        <button onClick={() => setCampoEditar("")}>
+                            Cancelar
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {mascota.sexo}
+
+                        <button
+                            onClick={() => {
+                                setCampoEditar("sexo");
+                                setNuevoValor(mascota.sexo);
+                            }}
+                        >
+                            Editar
+                        </button>
+                        
+                    </>
+                )}
+            </p>
+
+            <p>
+                <strong>Tamano:</strong>
+
+                {campoEditar === "tamano" ? (
+                    <>
+                        <input
+                            value={nuevoValor}
+                            onChange={(e) => setNuevoValor(e.target.value)}
+                        />
+
+                        <button onClick={() => editarCampo("tamano")}>
+                            Guardar
+                        </button>
+
+                        <button onClick={() => setCampoEditar("")}>
+                            Cancelar
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {mascota.tamano}
+
+                        <button
+                            onClick={() => {
+                                setCampoEditar("tamano");
+                                setNuevoValor(mascota.tamano);
+                            }}
+                        >
+                            Editar
+                        </button>
+                        
+                    </>
+                )}
+            </p>
+
         </div>
     </>
   );

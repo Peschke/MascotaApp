@@ -8,9 +8,12 @@ function App() {
       <BrowserRouter>
         <header>
           <nav>
-            <NavLink to="/">Inicio</NavLink>
-            <NavLink to="/mascotas">Mascotas</NavLink>
-            <NavLink to="/mascotas/nueva">Publicar Mascota</NavLink>
+            |
+            <NavLink to="/">Inicio</NavLink>|
+            |
+            <NavLink to="/mascotas">Mascotas</NavLink>|
+            |
+            <NavLink to="/mascotas/nueva">Publicar Mascota</NavLink>|
           </nav>
         </header>
 

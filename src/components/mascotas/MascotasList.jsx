@@ -5,20 +5,21 @@ function MascotasList(){
     const [mascotasList, setMascotasList] = useState([]);
     const [error, setError] = useState(null);
 
-    const fetchMascotas = async () => {
-        try {
-            const response = await api.get('mascotas/');
-            const data = response.data.results;
-            setMascotasList(data);
-        } catch (error) {
-            console.error("Error al obtener mascotas:", error);
-            setError("No se pudieron cargar las mascotas.");
-        }
-    }
-
     useEffect(() => {
+        const fetchMascotas = async () => {
+            try {
+                const response = await api.get("mascotas/");
+                if (response.status === 200) {
+                    setMascotasList(response.data);
+                }
+            } catch (error) {
+                console.log(error.response);
+                setError("No se pudieron cargar las mascotas.");
+            }
+        }
+
         fetchMascotas();
-    }, [])
+    }, []);
 
     return (
         <>

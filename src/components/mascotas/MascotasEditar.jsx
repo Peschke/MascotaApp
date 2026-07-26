@@ -2,6 +2,14 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import mascotasApi from "../../services/api";
 function MascotasEditar() {
+    //select api choices
+    const [estados, setEstados] = useState([]);
+    const [tipoMascota, setTipoMascota] = useState([]);
+    const [sexo, setSexo] = useState([]);
+    const [tamano, setTamano] = useState([]);
+    //seleccionado
+    const [selectedEstado, setEstado] = useState("");
+
 
     const [campoEditar, setCampoEditar] = useState("");
     const [nuevoValor, setNuevoValor] = useState("");
@@ -43,6 +51,10 @@ function MascotasEditar() {
         try{
             const response = await mascotasApi.get('choices/');
             console.log(response.data);
+            setEstados(response.data.estado);
+            setTipoMascota(response.data.tipo_mascota);
+            setSexo(response.data.sexo);
+            setTamano(response.data.tamano);
         }catch (error) {
             console.error(error);
         }
@@ -166,10 +178,12 @@ function MascotasEditar() {
 
                 {campoEditar === "estado" ? (
                     <>
-                        <input
-                            value={nuevoValor}
-                            onChange={(e) => setNuevoValor(e.target.value)}
-                        />
+                        <select value={selectedEstado} onChange={(e) => setNuevoValor(e.target.value)}>
+                            <option value={""} >Sin estado</option>
+                            {
+                                estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                            }
+                        </select>
 
                         <button onClick={() => editarCampo("estado")}>
                             Guardar

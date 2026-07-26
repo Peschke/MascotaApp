@@ -39,9 +39,19 @@ function MascotasEditar() {
         }
     }
 
-    
+    const fetchChoices = async () =>{
+        try{
+            const response = await mascotasApi.get('choices/');
+            console.log(response.data);
+        }catch (error) {
+            console.error(error);
+        }
+    }
 
-     
+    useEffect(()=>{
+        fetchChoices();
+    },[])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();

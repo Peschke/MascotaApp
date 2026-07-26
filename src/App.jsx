@@ -1,11 +1,10 @@
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MascotasList from "./components/mascotas/MascotasList"; 
 
 function App() {
   return (
     <>
-      <BrowserRouter>
         <header>
           <nav>
             |
@@ -29,7 +28,6 @@ function App() {
             <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
           </Routes>
         </main>
-      </BrowserRouter>
     </>
   );
 }

@@ -1,10 +1,10 @@
-import MascotasEditar from '../components/mascotas/MascotasEditar';
 function HomePage() {
+
   return (
     <>
-        <h1>Pagina Editar Mascotas</h1>
-        <MascotasEditar />
+        <h1>Pagina Principal</h1>
     </>
   );
 }
+
 export default HomePage;

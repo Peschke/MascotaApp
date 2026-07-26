@@ -17,9 +17,8 @@ function MascotasEditar() {
     const [nuevoValor, setNuevoValor] = useState("");
 
     const [idBusqueda, setIdBusqueda] = useState("");
-    const [mascota, setMascota] = useState([])
+    const [mascota, setMascota] = useState([]);
 
-    const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
     const fetchEditarMascota = async (id) => {
         try {
@@ -95,10 +94,7 @@ function MascotasEditar() {
                 </label>
                 <button >Buscar Mascota</button>
                 
-                {mascota?.id && (
-                    <button onClick={() => setMostrarFormulario(true)}>
-                        Editar Mascota
-                    </button>)}
+                
 
             </form>
 

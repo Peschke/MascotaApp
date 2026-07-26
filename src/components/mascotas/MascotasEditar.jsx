@@ -9,7 +9,9 @@ function MascotasEditar() {
     const [tamano, setTamano] = useState([]);
     //seleccionado
     const [selectedEstado, setEstado] = useState("");
-
+    const [selectedTipoMascota, setTipoMascotaSeleccionada] = useState("");
+    const [selectedSexo, setSexoSeleccionado] = useState("");
+    const [selectedTamano, setTamanoSeleccionado] = useState("");
 
     const [campoEditar, setCampoEditar] = useState("");
     const [nuevoValor, setNuevoValor] = useState("");
@@ -52,9 +54,11 @@ function MascotasEditar() {
             const response = await mascotasApi.get('choices/');
             console.log(response.data);
             setEstados(response.data.estado);
-            setTipoMascota(response.data.tipo_mascota);
+            setTipoMascota(response.data.tipo_animal);
+            console.log(response.data.tipo_animal);
             setSexo(response.data.sexo);
             setTamano(response.data.tamano);
+            console.log(response.data.tamano);
         }catch (error) {
             console.error(error);
         }
@@ -215,10 +219,12 @@ function MascotasEditar() {
 
                 {campoEditar === "tipo_animal" ? (
                     <>
-                        <input
-                            value={nuevoValor}
-                            onChange={(e) => setNuevoValor(e.target.value)}
-                        />
+                        <select value={selectedTipoMascota} onChange={(e) => setNuevoValor(e.target.value)}>
+                            <option value={""} >Sin estado</option>
+                            {
+                                tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                            }
+                        </select>
 
                         <button onClick={() => editarCampo("tipo_animal")}>
                             Guardar
@@ -320,10 +326,12 @@ function MascotasEditar() {
 
                 {campoEditar === "sexo" ? (
                     <>
-                        <input
-                            value={nuevoValor}
-                            onChange={(e) => setNuevoValor(e.target.value)}
-                        />
+                        <select value={selectedSexo} onChange={(e) => setNuevoValor(e.target.value)}>
+                            <option value={""} >Sin estado</option>
+                            {
+                                sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                            }
+                        </select>
 
                         <button onClick={() => editarCampo("sexo")}>
                             Guardar
@@ -355,10 +363,12 @@ function MascotasEditar() {
 
                 {campoEditar === "tamano" ? (
                     <>
-                        <input
-                            value={nuevoValor}
-                            onChange={(e) => setNuevoValor(e.target.value)}
-                        />
+                        <select value={selectedTamano} onChange={(e) => setNuevoValor(e.target.value)}>
+                            <option value={""} >desconocido</option>
+                            {
+                                tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                            }
+                        </select>
 
                         <button onClick={() => editarCampo("tamano")}>
                             Guardar

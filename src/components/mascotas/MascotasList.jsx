@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import MascotasCard from "./MascotaCard";
 
 function MascotasList(){
     const [mascotasList, setMascotasList] = useState([]);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchMascotas = async () => {
@@ -23,23 +24,12 @@ function MascotasList(){
 
     return (
         <>
-            <h2>Lista de mascotas</h2>
-
-            {/* agregar aqui el enlace a MascotasForm (NavLink) */}
-
-            {
-                mascotasList.map(m => (
-                    
-                    <div key={m.id}>
-                        <h3>{m.nombre}</h3>,
-                        <img src={m.imagen} />
-                    </div>
-                )
-                )
-            }
-
-            {/* agregar aqui las Routes y Route hacia formulario */}
-            
+            <article>
+                <h2>Lista de mascotas</h2>
+                <div>
+                    <MascotasCard listado={mascotasList} />
+                </div>
+            </article>
         </>
     )
 }

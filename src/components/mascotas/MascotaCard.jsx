@@ -1,4 +1,4 @@
-function MascotasCard({ listado }) {
+function MascotasCard({ listado, onVerDetalle }) {
     return (
         <>
             {listado.map((m) =>(
@@ -8,6 +8,9 @@ function MascotasCard({ listado }) {
                     <p>{m.descripcion}</p>
                     <p>{m.tipo_animal}</p>
                     <p>{m.estado}</p>
+                    <button type="button" onClick={() => onVerDetalle(m.id)}>
+                        Ver detalle
+                    </button>
                 </div>
             ))}
         </>

@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/mascotas" element={<MascotasList />} />
-          <Route path="/mascotas/nueva" element={<CrearMascotaPage />} />
+          <Route path="/mascotas/nueva" element={<CrearMascotaPage/>} />
           <Route path="/mascotas/:id" element={<MascotaDetailPage />} />
           <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
         </Routes>

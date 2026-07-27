@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import MascotasCard from "./MascotaCard";
+import "./MascotasList.css";
 
 function MascotasList(){
     const [mascotasList, setMascotasList] = useState([]);
@@ -39,15 +40,15 @@ function MascotasList(){
     };
 
     return (
-        <>
-            <article>
-                <h2>Lista de mascotas</h2>
-                {error ? <p>{error}</p> : null}
-                <div>
+        <div className="contenedor">
+            <article className="bloque">
+                <h2 className="titulo">Lista de mascotas</h2>
+                {error ? <p className="mensajeerror">{error}</p> : null}
+                <div className="grilla">
                     <MascotasCard listado={mascotasList} onVerDetalle={(id) => navigate(`/mascotas/${id}`)} />
                 </div>
             </article>
-        </>
+        </div>
     )
 }
 

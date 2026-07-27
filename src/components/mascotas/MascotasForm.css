@@ -1,0 +1,66 @@
+.formulario {
+  background-color: #ffffff;
+  border: 1px solid #f4eb9d;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.titulo {
+  color: #1ab681;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.campo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.etiqueta {
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.entrada {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.archivo {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.desplegable {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+.boton {
+  background-color: #1ab681;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.boton:hover {
+  background-color: #1dc33f;
+}

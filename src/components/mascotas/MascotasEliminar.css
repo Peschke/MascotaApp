@@ -1,0 +1,118 @@
+.contenedor {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.bloque {
+  background-color: #ffffff;
+  border: 1px solid #f4eb9d;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.titulo {
+  color: #1ab681;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.buscador {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.etiqueta {
+  font-weight: bold;
+  color: #2d3748;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.entrada {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.boton {
+  background-color: #1ab681;
+  color: #ffffff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #1dc33f;
+}
+
+.mensajeerror {
+  color: #e53e3e;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.tarjeta {
+  background-color: #f8efe7;
+  border: 1px solid #f4eb9d;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.subtitulo {
+  color: #1ab681;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.botoneliminar {
+  background-color: #e53e3e;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.botoneliminar:hover {
+  background-color: #c53030;
+}
+
+.imagen {
+  max-width: 100%;
+  height: auto;
+  max-height: 250px;
+  border-radius: 6px;
+  margin: 10px 0 15px 0;
+  display: block;
+}
+
+.linea {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #2d3748;
+}
+
+.negrita {
+  color: #1a202c;
+}
+
+.vacio {
+  color: #718096;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}

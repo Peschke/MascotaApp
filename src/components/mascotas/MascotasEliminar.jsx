@@ -1,7 +1,6 @@
 import { useState } from "react";
 import api from "../../services/api";
-
-
+import "./MascotasEliminar.css";
 
 function MascotasEliminar() {
 
@@ -74,51 +73,50 @@ function MascotasEliminar() {
     }
 
   return (
-    <>
-        <h2>Eliminar Mascota</h2>
-                {/* Buscador por id */}
-            <form onSubmit={handleSubmit}>
-                <label>
+    <div className="contenedor">
+        <div className="bloque">
+            <h2 className="titulo">Eliminar Mascota</h2>
+            {/* Buscador por id */}
+            <form className="buscador" onSubmit={handleSubmit}>
+                <label className="etiqueta">
                 ID de la mascota:
                 <input
+                    className="entrada"
                     type="number"
                     placeholder="Ej: 87"
                     value={idBusqueda}
                     onChange={(e) => setIdBusqueda(e.target.value)}
                 />
                 </label>
-                <button >Buscar Mascota</button> 
-                <p>{error}</p>
-                
-                
-
+                <button className="boton">Buscar Mascota</button> 
+                <p className="mensajeerror">{error}</p>
             </form>
+        </div>
             
-            {mascota.id ? (
-                <div>
-                    
-                    {mascota?.id && (
-                        <button type="button" onClick={eliminarMascota}>
-                            Eliminar Mascota
-                        </button>
-                    )}
+        {mascota?.id ? (
+            <div className="tarjeta">
+                
+                {mascota?.id && (
+                    <button className="botoneliminar" type="button" onClick={eliminarMascota}>
+                        Eliminar Mascota
+                    </button>
+                )}
 
-                    
-                    <h3>{mascota?.nombre}</h3> 
+                <h3 className="subtitulo">{mascota?.nombre}</h3> 
 
-                    <img src={mascota.imagen} alt={mascota?.nombre} />
-                    <p><strong>Descripción:</strong> {mascota?.descripcion}</p>
-                    <p><strong>Estado:</strong> {mascota?.estado}</p>
-                    <p><strong>Tipo Animal:</strong> {mascota?.tipo_animal}</p>
-                    <p><strong>Edad:</strong> {mascota?.edad}</p>
-                    <p><strong>Raza:</strong> {mascota?.raza}</p>
-                    <p><strong>Sexo:</strong> {mascota?.sexo}</p>
-                    <p><strong>Tamaño:</strong> {mascota?.tamano}</p>
-                </div>
-            ) : (
-                <p>No hay mascota para mostrar.</p>
-            )}
-    </>
+                <img className="imagen" src={mascota.imagen} alt={mascota?.nombre} />
+                <p className="linea"><strong className="negrita">Descripción:</strong> {mascota?.descripcion}</p>
+                <p className="linea"><strong className="negrita">Estado:</strong> {mascota?.estado}</p>
+                <p className="linea"><strong className="negrita">Tipo Animal:</strong> {mascota?.tipo_animal}</p>
+                <p className="linea"><strong className="negrita">Edad:</strong> {mascota?.edad}</p>
+                <p className="linea"><strong className="negrita">Raza:</strong> {mascota?.raza}</p>
+                <p className="linea"><strong className="negrita">Sexo:</strong> {mascota?.sexo}</p>
+                <p className="linea"><strong className="negrita">Tamaño:</strong> {mascota?.tamano}</p>
+            </div>
+        ) : (
+            <p className="vacio">No hay mascota para mostrar.</p>
+        )}
+    </div>
   );
 }
 

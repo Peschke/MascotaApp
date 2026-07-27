@@ -31,7 +31,6 @@ function MascotasForm({ onMascotaCreada }) {
 
         try {
             const response = await api.post('mascotas/', data)
-            console.log('Mascota creada:', response.data)
             alert('Se ha creado la mascota con éxito.')
 
             setNombre('')
@@ -48,7 +47,6 @@ function MascotasForm({ onMascotaCreada }) {
                 onMascotaCreada()
             }
         } catch (error) {
-            console.error('Error al crear mascota:', error.response)
             alert('Hubo un error al registrar la mascota.')
         }
     }

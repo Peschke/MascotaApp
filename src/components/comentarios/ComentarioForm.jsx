@@ -29,14 +29,11 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
                 onComentarioCreado()
             }
         } catch (error) {
-            console.error('Detalle del error:', error.response?.data)
             manejarError(error)
         }
     }
 
     const manejarError = (error) => {
-        console.error(error)
-
         const status = error.response?.status
 
         if (status === 404) {

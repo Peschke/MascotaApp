@@ -16,7 +16,6 @@ function MascotaDetailPage() {
             const response = await api.get(`mascotas/${id}/`);
             setMascota(response.data);
         } catch (error) {
-            console.log(error.response);
             manejarError(error);
         } finally {
             setLoading(false);
@@ -24,8 +23,6 @@ function MascotaDetailPage() {
     };
 
     const manejarError = (error) => {
-        console.error(error);
-
         const status = error.response?.status;
 
         if (status === 404) {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const mascotasApi = axios.create({
+const api = axios.create({
     baseURL: "https://mascotas.pythonanywhere.com/api/",
 });
 

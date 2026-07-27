@@ -19,4 +19,4 @@ function MascotasCard({ listado, onVerDetalle }) {
     );
 }
 
-export default MascotaCard;
+export default MascotasCard;

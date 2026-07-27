@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-
-
+import "./MascotasEditar.css";
 
 function MascotasEditar() {
     //select api choices
@@ -17,7 +16,6 @@ function MascotasEditar() {
     const [mascota, setMascota] = useState([]);
     //errores
     const [error, setError] = useState("");
-
 
     const fetchEditarMascota = async (id) => {
         try {
@@ -83,7 +81,6 @@ function MascotasEditar() {
         fetchChoices();
     },[])
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (idBusqueda.trim() === "") {
@@ -95,54 +92,47 @@ function MascotasEditar() {
         setError(""); // Limpiar el mensaje de error al realizar la busqueda
     }
 
-    
-
-        
   return (
-    <>
-        <div>
-                <h2>Editar Mascotas</h2>
-                {/* Buscador por id */}
-            <form onSubmit={handleSubmit}>
-                <label>
+    <div className="contenedor">
+        <div className="bloque">
+            <h2 className="titulo">Editar Mascotas</h2>
+            {/* Buscador por id */}
+            <form className="buscador" onSubmit={handleSubmit}>
+                <label className="etiqueta">
                 ID de la mascota:
                 <input
+                    className="entrada"
                     type="number"
                     placeholder="Ej: 87"
                     value={idBusqueda}
                     onChange={(e) => setIdBusqueda(e.target.value)}
                 />
                 </label>
-                <button >Buscar Mascota</button>
-                <p>{error}</p>
-                
-
+                <button className="boton">Buscar Mascota</button>
+                <p className="mensajeerror">{error}</p>
             </form>
         </div>
 
         {mascota.id ? (
-        <div>
+        <div className="tarjeta">
+            <h3 className="subtitulo">Editando: {mascota.nombre}</h3>
 
-
-        
-
-            <h3>Editando: {mascota.nombre}</h3>
-
-            <p>
-                <strong>Nombre:</strong>
+            <p className="linea">
+                <strong className="negrita">Nombre:</strong>
 
                 {campoEditar === "nombre" ? (
                     <>
                         <input
+                            className="entrada"
                             value={nuevoValor}
                             onChange={(e) => setNuevoValor(e.target.value)}
                         />
 
-                        <button onClick={() => editarCampo("nombre")}>
+                        <button className="botonguardar" onClick={() => editarCampo("nombre")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -151,6 +141,7 @@ function MascotasEditar() {
                         {mascota.nombre}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("nombre");
                                 setNuevoValor(mascota.nombre);
@@ -162,21 +153,22 @@ function MascotasEditar() {
                 )}
             </p>
 
-            <p>
-                <strong>Descripción:</strong>
+            <p className="linea">
+                <strong className="negrita">Descripción:</strong>
 
                 {campoEditar === "descripcion" ? (
                     <>
                         <input
+                            className="entrada"
                             value={nuevoValor}
                             onChange={(e) => setNuevoValor(e.target.value)}
                         />
 
-                        <button onClick={() => editarCampo("descripcion")}>
+                        <button className="botonguardar" onClick={() => editarCampo("descripcion")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -185,6 +177,7 @@ function MascotasEditar() {
                         {mascota.descripcion}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("descripcion");
                                 setNuevoValor(mascota.descripcion);
@@ -192,29 +185,28 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
-            <img src={mascota?.imagen} alt={mascota?.nombre} />
+            <img className="imagen" src={mascota?.imagen} alt={mascota?.nombre} />
 
-            <p>
-                <strong>Estado:</strong>
+            <p className="linea">
+                <strong className="negrita">Estado:</strong>
 
                 {campoEditar === "estado" ? (
                     <>
-                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select className="desplegable" value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >Sin estado</option>
                             {
                                 estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                             }
                         </select>
 
-                        <button onClick={() => editarCampo("estado")}>
+                        <button className="botonguardar" onClick={() => editarCampo("estado")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -223,6 +215,7 @@ function MascotasEditar() {
                         {mascota.estado}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("estado");
                                 setNuevoValor(mascota.estado);
@@ -230,28 +223,27 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
 
-            <p>
-                <strong>Tipo Animal:</strong>
+            <p className="linea">
+                <strong className="negrita">Tipo Animal:</strong>
 
                 {campoEditar === "tipo_animal" ? (
                     <>
-                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select className="desplegable" value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >Sin estado</option>
                             {
                                 tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                             }
                         </select>
 
-                        <button onClick={() => editarCampo("tipo_animal")}>
+                        <button className="botonguardar" onClick={() => editarCampo("tipo_animal")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -260,6 +252,7 @@ function MascotasEditar() {
                         {mascota.tipo_animal}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("tipo_animal");
                                 setNuevoValor(mascota.tipo_animal);
@@ -267,26 +260,26 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
 
-            <p>
-                <strong>Edad:</strong>
+            <p className="linea">
+                <strong className="negrita">Edad:</strong>
 
                 {campoEditar === "edad" ? (
                     <>
                         <input
+                            className="entrada"
                             value={nuevoValor}
                             onChange={(e) => setNuevoValor(e.target.value)}
                         />
 
-                        <button onClick={() => editarCampo("edad")}>
+                        <button className="botonguardar" onClick={() => editarCampo("edad")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -295,6 +288,7 @@ function MascotasEditar() {
                         {mascota.edad}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("edad");
                                 setNuevoValor(mascota.edad);
@@ -302,26 +296,26 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
 
-            <p>
-                <strong>Raza:</strong>
+            <p className="linea">
+                <strong className="negrita">Raza:</strong>
 
                 {campoEditar === "raza" ? (
                     <>
                         <input
+                            className="entrada"
                             value={nuevoValor}
                             onChange={(e) => setNuevoValor(e.target.value)}
                         />
 
-                        <button onClick={() => editarCampo("raza")}>
+                        <button className="botonguardar" onClick={() => editarCampo("raza")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -330,6 +324,7 @@ function MascotasEditar() {
                         {mascota.raza}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("raza");
                                 setNuevoValor(mascota.raza);
@@ -337,28 +332,27 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
 
-            <p>
-                <strong>Sexo:</strong>
+            <p className="linea">
+                <strong className="negrita">Sexo:</strong>
 
                 {campoEditar === "sexo" ? (
                     <>
-                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select className="desplegable" value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >Sin estado</option>
                             {
                                 sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                             }
                         </select>
 
-                        <button onClick={() => editarCampo("sexo")}>
+                        <button className="botonguardar" onClick={() => editarCampo("sexo")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -367,6 +361,7 @@ function MascotasEditar() {
                         {mascota.sexo}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("sexo");
                                 setNuevoValor(mascota.sexo);
@@ -374,28 +369,27 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
 
-            <p>
-                <strong>Tamano:</strong>
+            <p className="linea">
+                <strong className="negrita">Tamano:</strong>
 
                 {campoEditar === "tamano" ? (
                     <>
-                        <select value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
+                        <select className="desplegable" value={nuevoValor} onChange={(e) => setNuevoValor(e.target.value)}>
                             <option value={""} >desconocido</option>
                             {
                                 tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                             }
                         </select>
 
-                        <button onClick={() => editarCampo("tamano")}>
+                        <button className="botonguardar" onClick={() => editarCampo("tamano")}>
                             Guardar
                         </button>
 
-                        <button onClick={() => setCampoEditar("")}>
+                        <button className="botoncancelar" onClick={() => setCampoEditar("")}>
                             Cancelar
                         </button>
                     </>
@@ -404,6 +398,7 @@ function MascotasEditar() {
                         {mascota.tamano}
 
                         <button
+                            className="botoneditar"
                             onClick={() => {
                                 setCampoEditar("tamano");
                                 setNuevoValor(mascota.tamano);
@@ -411,16 +406,15 @@ function MascotasEditar() {
                         >
                             Editar
                         </button>
-                        
                     </>
                 )}
             </p>
 
         </div>
         ) : (
-                <p>No hay mascota para mostrar.</p>
-            )}
-    </>
+            <p className="vacio">No hay mascota para mostrar.</p>
+        )}
+    </div>
   );
 }
 

@@ -114,11 +114,15 @@ function MascotasEditar() {
                 
 
             </form>
+        </div>
+
+        {mascota.id ? (
+        <div>
 
 
         
 
-        <h3>Editando: {mascota.nombre}</h3>
+            <h3>Editando: {mascota.nombre}</h3>
 
             <p>
                 <strong>Nombre:</strong>
@@ -409,6 +413,9 @@ function MascotasEditar() {
             </p>
 
         </div>
+        ) : (
+                <p>No hay mascota para mostrar.</p>
+            )}
     </>
   );
 }

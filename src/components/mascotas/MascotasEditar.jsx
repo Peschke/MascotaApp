@@ -7,12 +7,14 @@ function MascotasEditar() {
     const [tipoMascota, setTipoMascota] = useState([]);
     const [sexo, setSexo] = useState([]);
     const [tamano, setTamano] = useState([]);
-
+    //editar campos
     const [campoEditar, setCampoEditar] = useState("");
     const [nuevoValor, setNuevoValor] = useState("");
-
+    //buscar mascota
     const [idBusqueda, setIdBusqueda] = useState("");
     const [mascota, setMascota] = useState([]);
+    //errores
+    const [error, setError] = useState("");
 
 
     const fetchEditarMascota = async (id) => {
@@ -23,6 +25,7 @@ function MascotasEditar() {
 
         }catch (error) {
             console.error(error);
+            manejarError(error);
         }
     }
     
@@ -58,6 +61,20 @@ function MascotasEditar() {
         }
     }
 
+    const manejarError = (error) => {
+        console.error(error);
+
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Los datos ingresados no son válidos. Revisa los campos.");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
+
     useEffect(()=>{
         fetchChoices();
     },[])
@@ -65,8 +82,13 @@ function MascotasEditar() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (idBusqueda.trim() === "") {
+            setError("Debe ingresar un ID.");
+            return;
+        }
         if (!idBusqueda) return;
         fetchEditarMascota(idBusqueda);
+        setError(""); // Limpiar el mensaje de error al realizar la busqueda
     }
 
     
@@ -88,7 +110,7 @@ function MascotasEditar() {
                 />
                 </label>
                 <button >Buscar Mascota</button>
-                
+                <p>{error}</p>
                 
 
             </form>

@@ -3,28 +3,28 @@ import HomePage from "./pages/HomePage";
 import MascotasList from "./components/mascotas/MascotasList";
 import MascotaDetailPage from "./pages/mascotas/MascotaDetailPage";
 import CrearMascotaPage from "./pages/mascotas/CrearMascotaPage";
-import EditarMascota from  './components/mascotas/MascotasEditar'
+import EditarMascota from './components/mascotas/MascotasEditar'
 import MascotasEliminar from './components/mascotas/MascotasEliminar'
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <header>
-        <nav>
-          <NavLink to="/" end className="navlink">Inicio</NavLink> |
-          <NavLink to="/mascotas">Mascotas</NavLink> |
-          <NavLink to="/mascotas/nueva">Publicar Mascota</NavLink>
-          <NavLink to={"/editar"}>Editar Mascota</NavLink>
-          <NavLink to={"/eliminar"}>Eliminar Mascota</NavLink>
+    <div className="estructura">
+      <header className="encabezado">
+        <nav className="navegacion">
+          <NavLink to="/" end className="enlace">Inicio</NavLink> |
+          <NavLink to="/mascotas" className="enlace">Mascotas</NavLink> |
+          <NavLink to="/mascotas/nueva" className="enlace">Publicar</NavLink>
+          <NavLink to="/editar" className="enlace">Editar</NavLink>
+          <NavLink to="/eliminar" className="enlace">Eliminar</NavLink>
         </nav>
       </header>
 
-      <main>
+      <main className="contenido">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/mascotas" element={<MascotasList />} />
-          <Route path="/mascotas/nueva" element={<CrearMascotaPage/>} />
+          <Route path="/mascotas/nueva" element={<CrearMascotaPage />} />
           <Route path="/mascotas/:id" element={<MascotaDetailPage />} />
           <Route path="/editar" element={<EditarMascota />} />
           <Route path="/editar/:id" element={<EditarMascota />} />
@@ -32,7 +32,7 @@ function App() {
           <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
         </Routes>
       </main>
-    </>
+    </div>
   );
 }
 

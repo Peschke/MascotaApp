@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../services/api";
 import ComentarioForm from "../../components/comentarios/ComentarioForm";
+import "./MascotaDetailPage.css";
 
 function MascotaDetailPage() {
     const { id } = useParams();
@@ -49,7 +50,7 @@ function MascotaDetailPage() {
         }
 
         if (typeof comentario.autor === "object") {
-            return comentario.autor.nombre || comentario.autor.username || comentario.autor.email || "Anónime";
+            return comentario.autor.nombre || comentario.autor.username || comentario.autor.email || "Anónimo";
         }
 
         return comentario.autor_nombre || comentario.usuario || "Anónimo";
@@ -60,50 +61,57 @@ function MascotaDetailPage() {
     };
 
     if (loading) {
-        return <p>Cargando detalle...</p>;
+        return <p className="cargando">Cargando detalle...</p>;
     }
 
     if (error) {
-        return <p>{error}</p>;
+        return <p className="mensajeerror">{error}</p>;
     }
 
     if (!mascota) {
-        return <p>No se encontró la mascota.</p>;
+        return <p className="mensajeerror">No se encontró la mascota.</p>;
     }
 
     return (
-        <article>
-            <Link to="/mascotas">Volver a la lista</Link>
-            <h2>{mascota.nombre}</h2>
-            {mascota.imagen ? <img src={mascota.imagen} alt={mascota.nombre} /> : null}
-            <p><strong>Descripción:</strong> {mascota.descripcion}</p>
-            <p><strong>Tipo:</strong> {mascota.tipo_animal}</p>
-            <p><strong>Estado:</strong> {mascota.estado}</p>
-            <p><strong>Edad:</strong> {mascota.edad}</p>
-            <p><strong>Raza:</strong> {mascota.raza}</p>
-            <p><strong>Sexo:</strong> {mascota.sexo}</p>
-            <p><strong>Tamaño:</strong> {mascota.tamano}</p>
+        <article className="detalle">
+            <Link to="/mascotas" className="volver">Volver a la lista</Link>
 
-            <h3>Comentarios</h3>
-            {mascota.comentarios?.length > 0 ? (
-                <ul>
-                    {mascota.comentarios.map((comentario) => {
-                        const texto = comentario.texto || comentario.comentario || comentario.contenido || "Sin Texto";
-                        const autor = getComentarioAutor(comentario);
+            <h2 className="titulo">{mascota.nombre}</h2>
 
-                        return (
-                            <li key={comentario.id}>
-                                <div><strong>{autor}</strong></div>
-                                <div>{texto}</div>
-                            </li>
-                        );
-                    })}
-                </ul>
-            ) : (
-                <p>No hay comentarios para esta mascota.</p>
-            )}
+            {mascota.imagen ? <img src={mascota.imagen} alt={mascota.nombre} className="imagen" /> : null}
 
-            <section>
+            <div className="datos">
+                <p><strong>Descripción:</strong> {mascota.descripcion}</p>
+                <p><strong>Tipo:</strong> {mascota.tipo_animal}</p>
+                <p><strong>Estado:</strong> {mascota.estado}</p>
+                <p><strong>Edad:</strong> {mascota.edad}</p>
+                <p><strong>Raza:</strong> {mascota.raza}</p>
+                <p><strong>Sexo:</strong> {mascota.sexo}</p>
+                <p><strong>Tamaño:</strong> {mascota.tamano}</p>
+            </div>
+
+            <section className="comentarios">
+                <h3>Comentarios</h3>
+                {mascota.comentarios?.length > 0 ? (
+                    <ul className="lista">
+                        {mascota.comentarios.map((comentario) => {
+                            const texto = comentario.texto || comentario.comentario || comentario.contenido || "Sin Texto";
+                            const autor = getComentarioAutor(comentario);
+
+                            return (
+                                <li key={comentario.id} className="item">
+                                    <div className="autor"><strong>{autor}</strong></div>
+                                    <div className="texto">{texto}</div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                ) : (
+                    <p className="vacio">No hay comentarios para esta mascota.</p>
+                )}
+            </section>
+
+            <section className="formulario">
                 <ComentarioForm mascotaId={id} onComentarioCreado={handleComentarioCreado} />
             </section>
         </article>

@@ -1,15 +1,18 @@
 .formulario {
-  background-color: #f8efe7;
+  background-color: #ffffff;
   border: 1px solid #f4eb9d;
-  padding: 20px;
+  padding: 25px;
   border-radius: 8px;
-  margin-top: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.subtitulo {
+.titulo {
   color: #1ab681;
-  font-size: 18px;
-  margin-bottom: 15px;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .campo {
@@ -32,31 +35,32 @@
   font-size: 14px;
 }
 
-.area {
+.archivo {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.desplegable {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  min-height: 90px;
-  resize: vertical;
+  background-color: #ffffff;
 }
 
 .boton {
   background-color: #1ab681;
   color: #ffffff;
   border: none;
-  padding: 10px 16px;
+  padding: 12px;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .boton:hover {
   background-color: #1dc33f;
-}
-
-.mensajeerror {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
 }

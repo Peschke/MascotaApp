@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import api from '../../services/api'
+import './MascotasForm.css'
 
-function MascotasForm() {
+function MascotasForm({ onMascotaCreada }) {
     const [nombre, setNombre] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [imagen, setImagen] = useState(null)
@@ -10,7 +12,6 @@ function MascotasForm() {
     const [raza, setRaza] = useState('')
     const [sexo, setSexo] = useState('')
     const [tamano, setTamano] = useState('')
-    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -20,7 +21,7 @@ function MascotasForm() {
         data.append('nombre', nombre)
         data.append('descripcion', descripcion)
         data.append('estado', estado)
-        data.append('tipo_animal', tipo_animal)
+        data.append('tipo_animal', tipoAnimal)
 
         if (imagen) data.append('imagen', imagen)
         if (edad) data.append('edad', edad)
@@ -33,7 +34,6 @@ function MascotasForm() {
             console.log('Mascota creada:', response.data)
             alert('Se ha creado la mascota con éxito.')
 
-            // Limpieza de campos al terminar
             setNombre('')
             setDescripcion('')
             setImagen(null)
@@ -44,106 +44,114 @@ function MascotasForm() {
             setSexo('')
             setTamano('')
 
-            // Avisamos al componente padre si existe la función
             if (onMascotaCreada) {
                 onMascotaCreada()
             }
         } catch (error) {
             console.error('Error al crear mascota:', error.response)
-            manejarError(error);
+            alert('Hubo un error al registrar la mascota.')
         }
     }
 
-    const manejarError = (error) => {
-        console.error(error);
-
-        const status = error.response?.status;
-
-        if (status === 404) {
-            setError("No se encontró la mascota.");
-        } else if (status === 400) {
-            setError("Los datos ingresados no son válidos. Revisa los campos.");
-        } else {
-            setError("Ocurrió un error. Intenta nuevamente más tarde.");
-        }
-    };
-
-
     return (
-        <form>
+        <form className="formulario" onSubmit={handleSubmit}>
+            <h3 className="titulo">Registrar Mascota</h3>
 
-            <label>Nombre:</label>
-            <input
-                type="text"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                required
-            />
+            <div className="campo">
+                <label className="etiqueta">Nombre:</label>
+                <input
+                    className="entrada"
+                    type="text"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                />
+            </div>
 
-            <label>Descripción:</label>
-            <input
-                type="text"
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                required
-            />
+            <div className="campo">
+                <label className="etiqueta">Descripción:</label>
+                <input
+                    className="entrada"
+                    type="text"
+                    value={descripcion}
+                    onChange={(e) => setDescripcion(e.target.value)}
+                    required
+                />
+            </div>
 
-            <label>Imagen:</label>
-            <input
-                type="file"
-                onChange={(e) => setImagen(e.target.files[0])}
-            />
+            <div className="campo">
+                <label className="etiqueta">Imagen:</label>
+                <input
+                    className="archivo"
+                    type="file"
+                    onChange={(e) => setImagen(e.target.files[0])}
+                />
+            </div>
 
-            <label>Estado:</label>
-            <select value={estado} onChange={(e) => setEstado(e.target.value)}>
-                <option value="perdida">Perdida</option>
-                <option value="encontrada">Encontrada</option>
-                <option value="en_adopcion">En adopción</option>
-                <option value="adoptada">Adoptada</option>
-            </select>
+            <div className="campo">
+                <label className="etiqueta">Estado:</label>
+                <select className="desplegable" value={estado} onChange={(e) => setEstado(e.target.value)}>
+                    <option value="perdida">Perdida</option>
+                    <option value="encontrada">Encontrada</option>
+                    <option value="en_adopcion">En adopción</option>
+                    <option value="adoptada">Adoptada</option>
+                </select>
+            </div>
 
-            <label>Tipo animal:</label>
-            <select value={tipoAnimal} onChange={(e) => setTipoAnimal(e.target.value)}>
-                <option value="perro">Perro</option>
-                <option value="gato">Gato</option>
-                <option value="ave">Ave</option>
-                <option value="roedor">Roedor</option>
-                <option value="reptil">Reptil</option>
-                <option value="otro">Otro</option>
-            </select>
+            <div className="campo">
+                <label className="etiqueta">Tipo animal:</label>
+                <select className="desplegable" value={tipoAnimal} onChange={(e) => setTipoAnimal(e.target.value)}>
+                    <option value="perro">Perro</option>
+                    <option value="gato">Gato</option>
+                    <option value="ave">Ave</option>
+                    <option value="roedor">Roedor</option>
+                    <option value="reptil">Reptil</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
 
-            <label>Edad:</label>
-            <input
-                type="number"
-                value={edad}
-                onChange={(e) => setEdad(e.target.value)}
-            />
+            <div className="campo">
+                <label className="etiqueta">Edad:</label>
+                <input
+                    className="entrada"
+                    type="number"
+                    value={edad}
+                    onChange={(e) => setEdad(e.target.value)}
+                />
+            </div>
 
-            <label>Raza:</label>
-            <input
-                type="text"
-                value={raza}
-                onChange={(e) => setRaza(e.target.value)}
-            />
+            <div className="campo">
+                <label className="etiqueta">Raza:</label>
+                <input
+                    className="entrada"
+                    type="text"
+                    value={raza}
+                    onChange={(e) => setRaza(e.target.value)}
+                />
+            </div>
 
-            <label>Sexo:</label>
-            <select value={sexo} onChange={(e) => setSexo(e.target.value)}>
-                <option value="">--------</option>
-                <option value="macho">Macho</option>
-                <option value="hembra">Hembra</option>
-                <option value="desconocido">Desconocido</option>
-            </select>
+            <div className="campo">
+                <label className="etiqueta">Sexo:</label>
+                <select className="desplegable" value={sexo} onChange={(e) => setSexo(e.target.value)}>
+                    <option value="">--------</option>
+                    <option value="macho">Macho</option>
+                    <option value="hembra">Hembra</option>
+                    <option value="desconocido">Desconocido</option>
+                </select>
+            </div>
 
-            <label>Tamaño:</label>
-            <select value={tamano} onChange={(e) => setTamano(e.target.value)}>
-                <option value="">--------</option>
-                <option value="pequeno">Pequeño</option>
-                <option value="mediano">Mediano</option>
-                <option value="grande">Grande</option>
-                <option value="desconocido">Desconocido</option>
-            </select>
+            <div className="campo">
+                <label className="etiqueta">Tamaño:</label>
+                <select className="desplegable" value={tamano} onChange={(e) => setTamano(e.target.value)}>
+                    <option value="">--------</option>
+                    <option value="pequeno">Pequeño</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="grande">Grande</option>
+                    <option value="desconocido">Desconocido</option>
+                </select>
+            </div>
 
-            <button type="submit">Agregar</button>
+            <button className="boton" type="submit">Agregar</button>
         </form>
     )
 }

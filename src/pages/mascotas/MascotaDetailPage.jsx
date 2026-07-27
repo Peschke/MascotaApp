@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../services/api";
+import ComentarioForm from "../../components/comentarios/ComentarioForm";
 
 function MascotaDetailPage() {
     const { id } = useParams();
@@ -60,6 +61,11 @@ function MascotaDetailPage() {
             ) : (
                 <p>No hay comentarios para esta mascota.</p>
             )}
+
+            <section>
+                <ComentarioForm mascotaID={id}/>
+            </section>
+
         </article>
     );
 }

@@ -1,6 +1,4 @@
 function ComentarioForm() {
-    const [autor, setAutor] = useState('')
-    const [contenido, setContenido] = useState('')
 
     return (
         <form>
@@ -15,6 +13,7 @@ function ComentarioForm() {
 
             <div>
                 <label>Comentario:</label>
+                <input type="text" />
             </div>
 
             <button type="submit">Publicar Comentario</button>

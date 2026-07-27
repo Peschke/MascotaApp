@@ -37,7 +37,12 @@ function MascotasEliminar() {
     };
 
     const eliminarMascota = async () => {
-        const confirmar = window.confirm(`¿Estás seguro de que deseas eliminar a ${mascota.nombre}?`);
+        if (idBusqueda.trim() === "") {
+            setError("Para eliminar debe ingresar un ID.");
+            return;
+        }
+
+        const confirmar = window.confirm(`¿Estás seguro de que deseas eliminar a ${mascota?.nombre}?`);
         if (!confirmar) return;
         
         try {
@@ -79,25 +84,37 @@ function MascotasEliminar() {
                     onChange={(e) => setIdBusqueda(e.target.value)}
                 />
                 </label>
-                <button >Buscar Mascota</button> <button onClick={eliminarMascota}>Eliminar Mascota</button>
+                <button >Buscar Mascota</button> 
                 <p>{error}</p>
                 
                 
 
             </form>
+            
+            {mascota.id ? (
+                <div>
+                    
+                    {mascota?.id && (
+                        <button type="button" onClick={eliminarMascota}>
+                            Eliminar Mascota
+                        </button>
+                    )}
 
-            <div>
-                <h3>{mascota.nombre}</h3>
+                    
+                    <h3>{mascota?.nombre}</h3> 
 
-                <img src={mascota.imagen} alt={mascota?.nombre} />
-                <p><strong>Descripción:</strong> {mascota?.descripcion}</p>
-                <p><strong>Estado:</strong> {mascota?.estado}</p>
-                <p><strong>Tipo Animal:</strong> {mascota?.tipo_animal}</p>
-                <p><strong>Edad:</strong> {mascota?.edad}</p>
-                <p><strong>Raza:</strong> {mascota?.raza}</p>
-                <p><strong>Sexo:</strong> {mascota?.sexo}</p>
-                <p><strong>Tamaño:</strong> {mascota?.tamano}</p>
-            </div>
+                    <img src={mascota.imagen} alt={mascota?.nombre} />
+                    <p><strong>Descripción:</strong> {mascota?.descripcion}</p>
+                    <p><strong>Estado:</strong> {mascota?.estado}</p>
+                    <p><strong>Tipo Animal:</strong> {mascota?.tipo_animal}</p>
+                    <p><strong>Edad:</strong> {mascota?.edad}</p>
+                    <p><strong>Raza:</strong> {mascota?.raza}</p>
+                    <p><strong>Sexo:</strong> {mascota?.sexo}</p>
+                    <p><strong>Tamaño:</strong> {mascota?.tamano}</p>
+                </div>
+            ) : (
+                <p>No hay mascota para mostrar.</p>
+            )}
     </>
   );
 }

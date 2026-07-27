@@ -36,8 +36,30 @@ function MascotasEliminar() {
         }
     };
 
+    const eliminarMascota = async () => {
+        const confirmar = window.confirm(`¿Estás seguro de que deseas eliminar a ${mascota.nombre}?`);
+        if (!confirmar) return;
+        
+        try {
+            setError("");
+            await mascotasApi.delete(`mascotas/${mascota.id}/`);
+            setMascota(null);
+            setIdBusqueda("");
+        } catch (error) {
+            console.error(error);
+            setError("Ocurrió un error al eliminar la mascota. Intenta nuevamente.");
+        }
+    
+        
+
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (idBusqueda.trim() === "") {
+            setError("Debe ingresar un ID.");
+            return;
+        }
         if (!idBusqueda) return;
         fetchEliminarMascota(idBusqueda);
         setError(""); // Limpiar el mensaje de error al realizar la busqueda
@@ -57,7 +79,7 @@ function MascotasEliminar() {
                     onChange={(e) => setIdBusqueda(e.target.value)}
                 />
                 </label>
-                <button >Buscar Mascota</button>
+                <button >Buscar Mascota</button> <button onClick={eliminarMascota}>Eliminar Mascota</button>
                 <p>{error}</p>
                 
                 
@@ -67,14 +89,14 @@ function MascotasEliminar() {
             <div>
                 <h3>{mascota.nombre}</h3>
 
-                <img src={mascota.imagen} alt={mascota.nombre} />
-                <p><strong>Descripción:</strong> {mascota.descripcion}</p>
-                <p><strong>Estado:</strong> {mascota.estado}</p>
-                <p><strong>Tipo Animal:</strong> {mascota.tipo_animal}</p>
-                <p><strong>Edad:</strong> {mascota.edad}</p>
-                <p><strong>Raza:</strong> {mascota.raza}</p>
-                <p><strong>Sexo:</strong> {mascota.sexo}</p>
-                <p><strong>Tamaño:</strong> {mascota.tamano}</p>
+                <img src={mascota.imagen} alt={mascota?.nombre} />
+                <p><strong>Descripción:</strong> {mascota?.descripcion}</p>
+                <p><strong>Estado:</strong> {mascota?.estado}</p>
+                <p><strong>Tipo Animal:</strong> {mascota?.tipo_animal}</p>
+                <p><strong>Edad:</strong> {mascota?.edad}</p>
+                <p><strong>Raza:</strong> {mascota?.raza}</p>
+                <p><strong>Sexo:</strong> {mascota?.sexo}</p>
+                <p><strong>Tamaño:</strong> {mascota?.tamano}</p>
             </div>
     </>
   );

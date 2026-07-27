@@ -16,7 +16,13 @@ function MascotaDetailPage() {
             setMascota(response.data);
         } catch (error) {
             console.log(error.response);
-            setError("No se pudo cargar el detalle de la mascota.");
+            if (error.response?.status === 401) {
+                setError("No autorizado. Por favor inicia sesión.");
+            } else if (error.response?.status === 404) {
+                setError("No se encontró a la mascota.");
+            } else {
+                setError("No se pudo cargar el detalle de la mascota.");
+            }
         } finally {
             setLoading(false);
         }
@@ -89,10 +95,8 @@ function MascotaDetailPage() {
             )}
 
             <section>
-                <ComentarioForm mascotaId={id}/>
                 <ComentarioForm mascotaId={id} onComentarioCreado={handleComentarioCreado} />
             </section>
-
         </article>
     );
 }

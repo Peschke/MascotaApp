@@ -9,22 +9,40 @@ function MascotaDetailPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchMascota = async () => {
-            try {
-                setLoading(true);
-                const response = await api.get(`mascotas/${id}/`);
-                setMascota(response.data);
-            } catch (error) {
-                console.log(error.response);
-                setError("No se pudo cargar el detalle de la mascota.");
-            } finally {
-                setLoading(false);
-            }
-        };
+    const fetchMascota = async () => {
+        try {
+            setLoading(true);
+            const response = await api.get(`mascotas/${id}/`);
+            setMascota(response.data);
+        } catch (error) {
+            console.log(error.response);
+            setError("No se pudo cargar el detalle de la mascota.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchMascota();
     }, [id]);
+
+    const getComentarioAutor = (comentario) => {
+        if (!comentario) return "Anónimo";
+
+        if (typeof comentario.autor === "string" && comentario.autor.trim()) {
+            return comentario.autor;
+        }
+
+        if (typeof comentario.autor === "object") {
+            return comentario.autor.nombre || comentario.autor.username || comentario.autor.email || "Anónime";
+        }
+
+        return comentario.autor_nombre || comentario.usuario || "Anónimo";
+    };
+
+    const handleComentarioCreado = () => {
+        fetchMascota();
+    };
 
     if (loading) {
         return <p>Cargando detalle...</p>;
@@ -54,9 +72,17 @@ function MascotaDetailPage() {
             <h3>Comentarios</h3>
             {mascota.comentarios?.length > 0 ? (
                 <ul>
-                    {mascota.comentarios.map((comentario) => (
-                        <li key={comentario.id}>{comentario.texto || comentario.comentario || comentario.contenido || "Sin texto"}</li>
-                    ))}
+                    {mascota.comentarios.map((comentario) => {
+                        const texto = comentario.texto || comentario.comentario || comentario.contenido || "Sin Texto";
+                        const autor = getComentarioAutor(comentario);
+
+                        return (
+                            <li key={comentario.id}>
+                                <div><strong>{autor}</strong></div>
+                                <div>{texto}</div>
+                            </li>
+                        );
+                    })}
                 </ul>
             ) : (
                 <p>No hay comentarios para esta mascota.</p>
@@ -64,6 +90,7 @@ function MascotaDetailPage() {
 
             <section>
                 <ComentarioForm mascotaId={id}/>
+                <ComentarioForm mascotaId={id} onComentarioCreado={handleComentarioCreado} />
             </section>
 
         </article>

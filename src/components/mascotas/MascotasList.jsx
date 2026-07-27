@@ -4,10 +4,24 @@ import api from "../../services/api";
 import MascotasCard from "./MascotaCard";
 import "./MascotasList.css";
 
+
+
 function MascotasList(){
     const [mascotasList, setMascotasList] = useState([]);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    const manejarError = (error) => {
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Error en la dirrecion URL");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
 
     useEffect(() => {
         const fetchMascotas = async () => {
@@ -24,17 +38,6 @@ function MascotasList(){
         fetchMascotas();
     }, []);
 
-    const manejarError = (error) => {
-        const status = error.response?.status;
-
-        if (status === 404) {
-            setError("No se encontró la mascota.");
-        } else if (status === 400) {
-            setError("Error en la dirrecion URL");
-        } else {
-            setError("Ocurrió un error. Intenta nuevamente más tarde.");
-        }
-    };
 
     return (
         <div className="contenedor">

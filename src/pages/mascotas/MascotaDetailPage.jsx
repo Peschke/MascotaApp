@@ -10,18 +10,6 @@ function MascotaDetailPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
-    const fetchMascota = async () => {
-        try {
-            setLoading(true);
-            const response = await api.get(`mascotas/${id}/`);
-            setMascota(response.data);
-        } catch (error) {
-            manejarError(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     const manejarError = (error) => {
         const status = error.response?.status;
 
@@ -34,8 +22,20 @@ function MascotaDetailPage() {
         }
     };
 
-
     useEffect(() => {
+        const fetchMascota = async () => {
+        try {
+            setLoading(true);
+            const response = await api.get(`mascotas/${id}/`);
+            setMascota(response.data);
+        } catch (error) {
+            manejarError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
         fetchMascota();
     }, [id]);
 
@@ -53,8 +53,21 @@ function MascotaDetailPage() {
         return comentario.autor_nombre || comentario.usuario || "Anónimo";
     };
 
-    const handleComentarioCreado = () => {
-        fetchMascota();
+    const handleComentarioCreado = async () => {
+
+        {/* 
+            Solucion para limpiar los errores con el eslint:
+            Duplicado de codigo de fetchMascota al no
+            poder definirlo en handleComentarioCreado por 
+            estar dentro del useEffect()    
+        */}
+
+        try {
+            const response = await api.get(`mascotas/${id}/`);
+            setMascota(response.data);
+        } catch (error) {
+            manejarError(error);
+        }
     };
 
     if (loading) {

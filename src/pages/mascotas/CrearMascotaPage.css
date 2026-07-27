@@ -1,0 +1,12 @@
+.pagina {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 20px 15px;
+}
+
+.bloque {
+  background-color: #ffffff;
+  border: 1px solid #f4eb9d;
+  padding: 20px;
+  border-radius: 8px;
+}

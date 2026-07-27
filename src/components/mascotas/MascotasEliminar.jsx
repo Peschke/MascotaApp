@@ -1,5 +1,6 @@
 import { useState } from "react";
-import mascotasApi from "../../services/api";
+import api from "../../services/api";
+
 
 
 function MascotasEliminar() {
@@ -12,7 +13,8 @@ function MascotasEliminar() {
 
     const fetchEliminarMascota = async (id) => {
         try {
-            const response = await mascotasApi.get(`mascotas/${id}`);
+            const response = await api.get(`mascotas/${id}`);
+
             console.log(response.data);
             setMascota(response.data);
 
@@ -47,7 +49,8 @@ function MascotasEliminar() {
         
         try {
             setError("");
-            await mascotasApi.delete(`mascotas/${mascota.id}/`);
+            await api.delete(`mascotas/${mascota.id}/`);
+
             setMascota(null);
             setIdBusqueda("");
         } catch (error) {

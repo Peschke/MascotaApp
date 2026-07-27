@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import mascotasApi from "../../services/api";
+import api from "../../services/api";
+
+
 
 function MascotasEditar() {
     //select api choices
@@ -19,7 +21,7 @@ function MascotasEditar() {
 
     const fetchEditarMascota = async (id) => {
         try {
-            const response = await mascotasApi.get(`mascotas/${id}`);
+            const response = await api.get(`mascotas/${id}`);
             console.log(response.data);
             setMascota(response.data);
 
@@ -31,7 +33,8 @@ function MascotasEditar() {
     
     const editarCampo = async (campo) => {
         try {
-            await mascotasApi.patch(`mascotas/${mascota.id}/`, {
+            await api.patch(`mascotas/${mascota.id}/`, {
+
                 [campo]: nuevoValor
             });
 
@@ -48,7 +51,8 @@ function MascotasEditar() {
 
     const fetchChoices = async () =>{
         try{
-            const response = await mascotasApi.get('choices/');
+            const response = await api.get('choices/');
+
             console.log(response.data);
             setEstados(response.data.estado);
             setTipoMascota(response.data.tipo_animal);

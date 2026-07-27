@@ -7,6 +7,18 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
     const [contenido, setContenido] = useState('')
     const [error, setError] = useState('')
 
+    const manejarError = (error) => {
+        const status = error.response?.status
+
+        if (status === 404) {
+            setError("No se encontró la mascota.")
+        } else if (status === 400) {
+            setError("Los datos ingresados no son válidos. Revisa los campos.")
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.")
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
@@ -30,18 +42,6 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
             }
         } catch (error) {
             manejarError(error)
-        }
-    }
-
-    const manejarError = (error) => {
-        const status = error.response?.status
-
-        if (status === 404) {
-            setError("No se encontró la mascota.")
-        } else if (status === 400) {
-            setError("Los datos ingresados no son válidos. Revisa los campos.")
-        } else {
-            setError("Ocurrió un error. Intenta nuevamente más tarde.")
         }
     }
 

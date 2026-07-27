@@ -43,11 +43,13 @@ function MascotasForm({ onMascotaCreada }) {
             setSexo('')
             setTamano('')
 
-            if (onMascotaCreada) {
+            if (response.status === 201) {
+                if (onMascotaCreada) {
                 onMascotaCreada()
+                }
             }
         } catch (error) {
-            alert('Hubo un error al registrar la mascota.')
+            alert('Hubo un error al registrar la mascota.', error)
         }
     }
 

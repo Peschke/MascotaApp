@@ -17,6 +17,18 @@ function MascotasEditar() {
     //errores
     const [error, setError] = useState("");
 
+    const manejarError = (error) => {
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Los datos ingresados no son válidos. Revisa los campos.");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
+
     const fetchEditarMascota = async (id) => {
         try {
             const response = await api.get(`mascotas/${id}`);
@@ -45,35 +57,23 @@ function MascotasEditar() {
         }
     }
 
-    const fetchChoices = async () =>{
-        try{
-            const response = await api.get('choices/');
-
-            console.log(response.data);
-            setEstados(response.data.estado);
-            setTipoMascota(response.data.tipo_animal);
-            console.log(response.data.tipo_animal);
-            setSexo(response.data.sexo);
-            setTamano(response.data.tamano);
-            console.log(response.data.tamano);
-        }catch (error) {
-            manejarError(error);
-        }
-    }
-
-    const manejarError = (error) => {
-        const status = error.response?.status;
-
-        if (status === 404) {
-            setError("No se encontró la mascota.");
-        } else if (status === 400) {
-            setError("Los datos ingresados no son válidos. Revisa los campos.");
-        } else {
-            setError("Ocurrió un error. Intenta nuevamente más tarde.");
-        }
-    };
-
     useEffect(()=>{
+        const fetchChoices = async () =>{
+            try{
+                const response = await api.get('choices/');
+
+                console.log(response.data);
+                setEstados(response.data.estado);
+                setTipoMascota(response.data.tipo_animal);
+                console.log(response.data.tipo_animal);
+                setSexo(response.data.sexo);
+                setTamano(response.data.tamano);
+                console.log(response.data.tamano);
+            }catch (error) {
+                manejarError(error);
+            }
+        }
+
         fetchChoices();
     },[])
 

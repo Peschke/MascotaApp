@@ -10,17 +10,6 @@ function MascotasEliminar() {
     //error
     const [error, setError] = useState("");
 
-    const fetchEliminarMascota = async (id) => {
-        try {
-            const response = await api.get(`mascotas/${id}`);
-
-            setMascota(response.data);
-
-        }catch (error) {
-            manejarError(error);
-        }
-    }
-
     const manejarError = (error) => {
         const status = error.response?.status;
 
@@ -32,6 +21,17 @@ function MascotasEliminar() {
             setError("Ocurrió un error. Intenta nuevamente más tarde.");
         }
     };
+
+    const fetchEliminarMascota = async (id) => {
+        try {
+            const response = await api.get(`mascotas/${id}`);
+
+            setMascota(response.data);
+
+        }catch (error) {
+            manejarError(error);
+        }
+    }
 
     const eliminarMascota = async () => {
         if (idBusqueda.trim() === "") {
@@ -49,7 +49,7 @@ function MascotasEliminar() {
             setMascota(null);
             setIdBusqueda("");
         } catch (error) {
-            setError("Ocurrió un error al eliminar la mascota. Intenta nuevamente.");
+            setError("Ocurrió un error al eliminar la mascota. Intenta nuevamente.", error);
         }
     
         

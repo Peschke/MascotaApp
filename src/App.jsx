@@ -14,8 +14,8 @@ function App() {
         <nav className="navegacion">
           <NavLink to="/" end className="enlace">Inicio</NavLink> |
           <NavLink to="/mascotas" className="enlace">Mascotas</NavLink> |
-          <NavLink to="/mascotas/nueva" className="enlace">Publicar</NavLink>
-          <NavLink to="/editar" className="enlace">Editar</NavLink>
+          <NavLink to="/mascotas/nueva" className="enlace">Publicar</NavLink> |
+          <NavLink to="/editar" className="enlace">Editar</NavLink> |
           <NavLink to="/eliminar" className="enlace">Eliminar</NavLink>
         </nav>
       </header>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../../services/api";
 
 
+
 function MascotasEliminar() {
 
     //buscar mascota por id
@@ -13,6 +14,7 @@ function MascotasEliminar() {
     const fetchEliminarMascota = async (id) => {
         try {
             const response = await api.get(`mascotas/${id}`);
+
             console.log(response.data);
             setMascota(response.data);
 
@@ -48,6 +50,7 @@ function MascotasEliminar() {
         try {
             setError("");
             await api.delete(`mascotas/${mascota.id}/`);
+
             setMascota(null);
             setIdBusqueda("");
         } catch (error) {

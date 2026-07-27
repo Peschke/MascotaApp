@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
+
+
 function MascotasEditar() {
     //select api choices
     const [estados, setEstados] = useState([]);
@@ -32,6 +34,7 @@ function MascotasEditar() {
     const editarCampo = async (campo) => {
         try {
             await api.patch(`mascotas/${mascota.id}/`, {
+
                 [campo]: nuevoValor
             });
 
@@ -49,6 +52,7 @@ function MascotasEditar() {
     const fetchChoices = async () =>{
         try{
             const response = await api.get('choices/');
+
             console.log(response.data);
             setEstados(response.data.estado);
             setTipoMascota(response.data.tipo_animal);

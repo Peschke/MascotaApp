@@ -27,9 +27,23 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
             }
         } catch (error) {
             console.error('Detalle del error 400:', error.response?.data)
-            alert('Hubo un error al enviar el comentario.')
+            manejarError(error);
         }
     }
+
+    const manejarError = (error) => {
+        console.error(error);
+
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Los datos ingresados no son válidos. Revisa los campos.");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
 
     return (
         <form onSubmit={handleSubmit}>

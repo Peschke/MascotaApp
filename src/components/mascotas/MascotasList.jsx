@@ -17,18 +17,26 @@ function MascotasList(){
                 }
             } catch (error) {
                 console.log(error.response);
-                if (error.response?.status === 401) {
-                    setError("No autorizado. Por favor inicia sesión.");
-                } else if (error.response?.status === 404) {
-                    setError("No se encontró a la mascota.");
-                } else {
-                    setError("No se pudo cargar el detalle de la mascota.");
-                }
+                manejarError(error);
             }
         }
 
         fetchMascotas();
     }, []);
+
+    const manejarError = (error) => {
+        console.error(error);
+
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Error en la dirrecion URL");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
 
     return (
         <>

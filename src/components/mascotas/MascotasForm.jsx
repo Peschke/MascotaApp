@@ -10,6 +10,7 @@ function MascotasForm() {
     const [raza, setRaza] = useState('')
     const [sexo, setSexo] = useState('')
     const [tamano, setTamano] = useState('')
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -49,9 +50,23 @@ function MascotasForm() {
             }
         } catch (error) {
             console.error('Error al crear mascota:', error.response)
-            alert('Hubo un error al registrar la mascota.')
+            manejarError(error);
         }
     }
+
+    const manejarError = (error) => {
+        console.error(error);
+
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Los datos ingresados no son válidos. Revisa los campos.");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
 
 
     return (

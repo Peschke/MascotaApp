@@ -16,17 +16,26 @@ function MascotaDetailPage() {
             setMascota(response.data);
         } catch (error) {
             console.log(error.response);
-            if (error.response?.status === 401) {
-                setError("No autorizado. Por favor inicia sesión.");
-            } else if (error.response?.status === 404) {
-                setError("No se encontró a la mascota.");
-            } else {
-                setError("No se pudo cargar el detalle de la mascota.");
-            }
+            manejarError(error);
         } finally {
             setLoading(false);
         }
     };
+
+    const manejarError = (error) => {
+        console.error(error);
+
+        const status = error.response?.status;
+
+        if (status === 404) {
+            setError("No se encontró la mascota.");
+        } else if (status === 400) {
+            setError("Los datos ingresados no son válidos. Revisa los campos.");
+        } else {
+            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+        }
+    };
+
 
     useEffect(() => {
         fetchMascota();

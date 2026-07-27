@@ -1,3 +1,62 @@
-.comentarioform {
-    background-color: aquamarine;
+.formulario {
+  background-color: #f8efe7;
+  border: 1px solid #f4eb9d;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.subtitulo {
+  color: #1ab681;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.campo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.etiqueta {
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.entrada {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.area {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  min-height: 90px;
+  resize: vertical;
+}
+
+.boton {
+  background-color: #1ab681;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #1dc33f;
+}
+
+.mensajeerror {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
 }

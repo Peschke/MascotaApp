@@ -1,12 +1,15 @@
 import { useState } from "react"
 import api from "../../services/api"
+import "./ComentarioForm.css"
 
 function ComentarioForm({ mascotaId, onComentarioCreado }) {
     const [autor, setAutor] = useState('')
     const [contenido, setContenido] = useState('')
+    const [error, setError] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setError('')
 
         const nuevoComentario = {
             mascota: mascotaId,
@@ -26,32 +29,33 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
                 onComentarioCreado()
             }
         } catch (error) {
-            console.error('Detalle del error 400:', error.response?.data)
-            manejarError(error);
+            console.error('Detalle del error:', error.response?.data)
+            manejarError(error)
         }
     }
 
     const manejarError = (error) => {
-        console.error(error);
+        console.error(error)
 
-        const status = error.response?.status;
+        const status = error.response?.status
 
         if (status === 404) {
-            setError("No se encontró la mascota.");
+            setError("No se encontró la mascota.")
         } else if (status === 400) {
-            setError("Los datos ingresados no son válidos. Revisa los campos.");
+            setError("Los datos ingresados no son válidos. Revisa los campos.")
         } else {
-            setError("Ocurrió un error. Intenta nuevamente más tarde.");
+            setError("Ocurrió un error. Intenta nuevamente más tarde.")
         }
-    };
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h4>Agregar un comentario</h4>
+        <form className="formulario" onSubmit={handleSubmit}>
+            <h4 className="subtitulo">Agregar un comentario</h4>
 
-            <div>
-                <label>Tu nombre:</label>
+            <div className="campo">
+                <label className="etiqueta">Tu nombre:</label>
                 <input
+                    className="entrada"
                     type="text"
                     value={autor}
                     onChange={(e) => setAutor(e.target.value)}
@@ -60,9 +64,10 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
                 />
             </div>
 
-            <div>
-                <label>Comentario:</label>
+            <div className="campo">
+                <label className="etiqueta">Comentario:</label>
                 <textarea
+                    className="area"
                     value={contenido}
                     onChange={(e) => setContenido(e.target.value)}
                     placeholder="Escribe tu duda o mensaje sobre esta mascota..."
@@ -70,7 +75,9 @@ function ComentarioForm({ mascotaId, onComentarioCreado }) {
                 />
             </div>
 
-            <button type="submit">Publicar Comentario</button>
+            <button className="boton" type="submit">Publicar Comentario</button>
+
+            {error ? <p className="mensajeerror">{error}</p> : null}
         </form>
     )
 }

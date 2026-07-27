@@ -17,7 +17,6 @@ function MascotasList(){
                     setMascotasList(response.data);
                 }
             } catch (error) {
-                console.log(error.response);
                 manejarError(error);
             }
         }
@@ -26,8 +25,6 @@ function MascotasList(){
     }, []);
 
     const manejarError = (error) => {
-        console.error(error);
-
         const status = error.response?.status;
 
         if (status === 404) {

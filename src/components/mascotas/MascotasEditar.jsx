@@ -20,11 +20,9 @@ function MascotasEditar() {
     const fetchEditarMascota = async (id) => {
         try {
             const response = await api.get(`mascotas/${id}`);
-            console.log(response.data);
             setMascota(response.data);
 
         }catch (error) {
-            console.error(error);
             manejarError(error);
         }
     }
@@ -43,7 +41,7 @@ function MascotasEditar() {
             setNuevoValor("");
 
         } catch (error) {
-            console.error(error);
+            manejarError(error);
         }
     }
 
@@ -59,13 +57,11 @@ function MascotasEditar() {
             setTamano(response.data.tamano);
             console.log(response.data.tamano);
         }catch (error) {
-            console.error(error);
+            manejarError(error);
         }
     }
 
     const manejarError = (error) => {
-        console.error(error);
-
         const status = error.response?.status;
 
         if (status === 404) {

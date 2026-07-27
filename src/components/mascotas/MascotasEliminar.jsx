@@ -14,18 +14,14 @@ function MascotasEliminar() {
         try {
             const response = await api.get(`mascotas/${id}`);
 
-            console.log(response.data);
             setMascota(response.data);
 
         }catch (error) {
-            console.error(error);
             manejarError(error);
         }
     }
 
     const manejarError = (error) => {
-        console.error(error);
-
         const status = error.response?.status;
 
         if (status === 404) {
@@ -53,7 +49,6 @@ function MascotasEliminar() {
             setMascota(null);
             setIdBusqueda("");
         } catch (error) {
-            console.error(error);
             setError("Ocurrió un error al eliminar la mascota. Intenta nuevamente.");
         }
     

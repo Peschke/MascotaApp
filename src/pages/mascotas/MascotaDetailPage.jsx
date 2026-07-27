@@ -63,7 +63,7 @@ function MascotaDetailPage() {
             )}
 
             <section>
-                <ComentarioForm mascotaID={id}/>
+                <ComentarioForm mascotaId={id}/>
             </section>
 
         </article>

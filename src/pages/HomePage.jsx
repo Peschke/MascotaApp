@@ -25,17 +25,17 @@ function HomePage() {
       {/* Sección de características o accesos rápidos */}
       <section>
         <div>
-          <h3>🐕 Registro</h3>
+          <h3>Registro</h3>
           <p>Explora publicaciones detalladas con fotos e información sobre cada mascota.</p>
         </div>
 
         <div>
-          <h3>💬 Comunidad</h3>
+          <h3>Comunidad</h3>
           <p>Comenta en las publicaciones de otros usuarios.</p>
         </div>
 
         <div>
-          <h3>📢 Publicación Fáci</h3>
+          <h3>Publicación Fáci</h3>
           <p>Agrega a tu mascotabdesde nuestra API.</p>
         </div>
       </section>
